@@ -11,14 +11,12 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['tab-group-dynamic-example.css']
 })
 export class TabGroupDynamicExample implements OnInit {
-  selectedMonths = [];
+  map = new Map();
   ngOnInit(): void {
     let date = new Date();
     for (let i = date.getFullYear(); i > date.getFullYear() - 7; i--) {
       this.years.push(i);
-      let obj = {};
-      obj[i] = [];
-      this.selectedMonths.push(obj);
+      this.map.set(i, []);
     }
 
     debugger;
@@ -41,11 +39,11 @@ export class TabGroupDynamicExample implements OnInit {
 
   change(a, month, year) {
     debugger;
-    let obj = this.selectedMonths.filter(sm => sm[year] === year);
+    let obj = this.map.get(year);
 
     obj.push(month);
-    let x = {};
-    x[year] = obj;
-    console.log(obj);
+    this.map.set(year, obj);
+    debugger;
+    console.log(this.map);
   }
 }
