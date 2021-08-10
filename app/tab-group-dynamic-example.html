@@ -1,7 +1,7 @@
-<mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+<mat-tab-group>
+  <mat-tab *ngFor="let year of years; let index = index" [label]="year">
     <ul *ngFor="let x of months">
-      <mat-checkbox>
+      <mat-checkbox (change)="change($event, x, year)">
         <li style="list-style:none;">{{x}}</li>
       </mat-checkbox>
     </ul>
@@ -10,7 +10,3 @@
 
   </mat-tab>
 </mat-tab-group>
-<div class="checkbox" *ngFor="let list of xyzlist">
-  <label>
-  <input formControlName="interestSectors" type="checkbox" value="{{list.id}}" (change)="onCheckboxChange(list,$event)">{{list.value}}</label>
-</div>

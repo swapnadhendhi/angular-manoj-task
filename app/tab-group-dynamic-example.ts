@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core/src/core';
 import { FormControl } from '@angular/forms';
 
 /**
@@ -9,9 +10,20 @@ import { FormControl } from '@angular/forms';
   templateUrl: 'tab-group-dynamic-example.html',
   styleUrls: ['tab-group-dynamic-example.css']
 })
-export class TabGroupDynamicExample {
-  tabs = ['First', 'Second', 'Third'];
-  selected = new FormControl(0);
+export class TabGroupDynamicExample implements OnInit {
+  selectedMonths = [];
+  ngOnInit(): void {
+    let date = new Date();
+    for (let i = date.getFullYear(); i > date.getFullYear() - 7; i--) {
+      this.years.push(i);
+      let obj = {};
+      obj[i] = [];
+      this.selectedMonths.push(obj);
+    }
+
+    debugger;
+  }
+  years = [];
   months = [
     'Jan',
     'Feb',
@@ -26,15 +38,14 @@ export class TabGroupDynamicExample {
     'November',
     'December'
   ];
-  addTab(selectAfterAdding: boolean) {
-    this.tabs.push('New');
 
-    if (selectAfterAdding) {
-      this.selected.setValue(this.tabs.length - 1);
-    }
-  }
+  change(a, month, year) {
+    debugger;
+    let obj = this.selectedMonths.filter(sm => sm[year] === year);
 
-  removeTab(index: number) {
-    this.tabs.splice(index, 1);
+    obj.push(month);
+    let x = {};
+    x[year] = obj;
+    console.log(obj);
   }
 }
